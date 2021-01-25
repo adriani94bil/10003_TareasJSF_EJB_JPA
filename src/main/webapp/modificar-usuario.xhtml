@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Modificar Usuario</title>
+    </h:head>
+    <h:body>
+        <h2>Datos del Usuario</h2>
+        <h:form id="formUpdateUser">
+            Introudce el Id del user a modificar:
+            <h:inputText value="#{gestionUsuariosMB.usuarioAModificar.idUsuario}" required="true" requiredMessage="Obligatorio" id="idUsuario">
+            </h:inputText>
+            <br/>
+            Nombre:
+            <h:inputText value="#{gestionUsuariosMB.usuarioAModificar.nombre}" required="true" requiredMessage="Obligatorio" id="nombre">
+            </h:inputText>
+            <br/>
+            Email
+            <h:inputText value="#{gestionUsuariosMB.usuarioAModificar.email}" required="true" requiredMessage="Obligatorio" id="email">
+            </h:inputText>
+            <br/>
+            Clave
+            <h:inputSecret value="#{gestionUsuariosMB.usuarioAModificar.password}" required="true" requiredMessage="Obligatorio" id="pwd">
+                <f:validateLength minimum="1"/>
+            </h:inputSecret>
+            <h:commandButton value="Update" action="#{gestionUsuariosMB.update()}" />
+        </h:form>
+    </h:body>
+</html>
+

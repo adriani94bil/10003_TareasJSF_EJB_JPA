@@ -6,7 +6,10 @@
 package com.tareas.web;
 
 import com.tareas.entidades.Usuario;
+import com.tareas.excepciones.UsuarioNotFoundException;
 import com.tareas.servicios.UsuarioServiceLocal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -53,7 +56,11 @@ public class PruebasManagedBean {
     
     // action
     public void mostrarUsuario(int i){
-        this.usuarioEncontrado=usuarioService.getUsuario(i);
+        try {
+            this.usuarioEncontrado=usuarioService.getUsuario(i);
+        } catch (UsuarioNotFoundException ex) {
+            Logger.getLogger(PruebasManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public void altaUsuario(){
         usuarioService.alta(usuarioRegister);
