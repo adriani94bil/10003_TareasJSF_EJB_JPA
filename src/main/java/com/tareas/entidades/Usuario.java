@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.tareas.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,6 +25,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "USUARIOS")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
@@ -54,6 +56,11 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "PASSWORD")
     private String password;
+    
+    // MAPPEDBY indica el atributo de la clase Tarea
+    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+//    private Collection<Tarea> tareasCollection;
 
     public Usuario() {
     }
@@ -101,6 +108,15 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
+//    @XmlTransient
+//    public Collection<Tarea> getTareasCollection() {
+//        return tareasCollection;
+//    }
+//
+//    public void setTareasCollection(Collection<Tarea> tareasCollection) {
+//        this.tareasCollection = tareasCollection;
+//    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -123,7 +139,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tareas.entidades.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "com.tareas.entidades.Usuarios[ idUsuario=" + idUsuario + " ]";
     }
     
 }

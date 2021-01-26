@@ -4,7 +4,7 @@
     <jta-data-source>java:app/jdbc/TareasDB2</jta-data-source>
     <class>com.tareas.entidades.Tarea</class>
     <class>com.tareas.entidades.Usuario</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/TareasDB2"/>
       <property name="javax.persistence.jdbc.user" value="app"/>

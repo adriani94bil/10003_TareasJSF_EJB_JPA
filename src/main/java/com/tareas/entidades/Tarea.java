@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.tareas.entidades;
 
 import java.io.Serializable;
@@ -12,11 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -24,8 +23,10 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "TAREAS")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tarea.findAll", query = "SELECT t FROM Tarea t"),
+    @NamedQuery(name = "Tarea.findByEstadoAndUserId", query = "SELECT t FROM Tarea t WHERE estado = :estado AND usuario.idUsuario= :idUsuario"),
     @NamedQuery(name = "Tarea.findByIdTarea", query = "SELECT t FROM Tarea t WHERE t.idTarea = :idTarea"),
     @NamedQuery(name = "Tarea.findByDescripcion", query = "SELECT t FROM Tarea t WHERE t.descripcion = :descripcion"),
     @NamedQuery(name = "Tarea.findByEstado", query = "SELECT t FROM Tarea t WHERE t.estado = :estado")})
@@ -44,9 +45,13 @@ public class Tarea implements Serializable {
     private String descripcion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 15)
     @Column(name = "ESTADO")
     private String estado;
+    
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
+    @ManyToOne(optional = false)
+    private Usuario usuario;
 
     public Tarea() {
     }
@@ -85,6 +90,14 @@ public class Tarea implements Serializable {
         this.estado = estado;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,7 +120,7 @@ public class Tarea implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tareas.entidades.Tarea[ idTarea=" + idTarea + " ]";
+        return "com.tareas.entidades.Tareas[ idTarea=" + idTarea + " ]";
     }
     
 }
