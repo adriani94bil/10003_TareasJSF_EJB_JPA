@@ -26,10 +26,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tarea.findAll", query = "SELECT t FROM Tarea t"),
-    @NamedQuery(name = "Tarea.findByEstadoAndUserId", query = "SELECT t FROM Tarea t WHERE estado = :estado AND usuario.idUsuario= :idUsuario"),
+    @NamedQuery(name = "Tarea.findByEstadoAndUserId", query = "SELECT t FROM Tarea t WHERE t.estado = :estado AND t.usuario.idUsuario= :idUsuario"),
     @NamedQuery(name = "Tarea.findByIdTarea", query = "SELECT t FROM Tarea t WHERE t.idTarea = :idTarea"),
     @NamedQuery(name = "Tarea.findByDescripcion", query = "SELECT t FROM Tarea t WHERE t.descripcion = :descripcion"),
-    @NamedQuery(name = "Tarea.findByEstado", query = "SELECT t FROM Tarea t WHERE t.estado = :estado")})
+    @NamedQuery(name = "Tarea.findByEstado", query = "SELECT t FROM Tarea t WHERE t.estado = :estado")
+})
 public class Tarea implements Serializable {
 
     private static final long serialVersionUID = 1L;

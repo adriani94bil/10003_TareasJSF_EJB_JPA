@@ -6,6 +6,8 @@
 package com.tareas.servicios;
 
 import com.tareas.entidades.Tarea;
+import com.tareas.excepciones.TareaNotFoundException;
+import com.tareas.excepciones.TareaUpdateException;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,6 +25,15 @@ public class TareasService implements TareasServiceLocal {
     private EntityManager em;
     
     @Override
+    public Tarea getTarea(Integer id) throws TareaNotFoundException {
+        Tarea t=em.find(Tarea.class, id);
+        if (t==null) {
+            throw new TareaNotFoundException("No existe la tarea solicitada");
+        }
+        return t;
+    }
+    
+    @Override
     public Collection<Tarea> getTareas(Integer idUsuario, String estado) {
         
         Query query= em.createNamedQuery("Tarea.findByEstadoAndUserId");
@@ -30,5 +41,15 @@ public class TareasService implements TareasServiceLocal {
         query.setParameter("idUsuario",idUsuario);
         return query.getResultList();
     }
+
+    @Override
+    public void modificarEstado(Tarea tarea, String nuevoEstado) throws TareaNotFoundException, TareaUpdateException {
+        // Traigo la tarea de la DB
+        Tarea tareaDB=this.getTarea(tarea.getIdTarea());
+        tareaDB.setEstado(nuevoEstado);
+        //Al finalizar el método realiza el commit
+        
+    }
+
 
 }
