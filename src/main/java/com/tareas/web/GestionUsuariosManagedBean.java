@@ -19,10 +19,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author user
- */
+
 @Named(value = "gestionUsuariosMB")
 @RequestScoped
 public class GestionUsuariosManagedBean {

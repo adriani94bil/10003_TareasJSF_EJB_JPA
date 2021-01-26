@@ -7,7 +7,7 @@
         <title>Lista Tareas</title>
     </h:head>
     <h:body>
-        <h2> Lista de tareas usuario 1</h2>
+        <h2> Mis Tareas</h2>
         <h:dataTable var="tareaToDo" value="#{gestionTareasMB.coleccionTareasTODO}">
              <h:column>
                     <f:facet name="header">Id </f:facet>
@@ -24,7 +24,7 @@
              <h:column>
                  <h:form id="formToDoIn">
                     <f:facet name="header"> </f:facet>
-                    <h:commandButton value="--->" action="#{gestionTareasMB.updateInProgress(tareaToDo)}" /> 
+                    <h:commandButton value="--->" action="#{gestionTareasMB.updateInProgress(tareaToDo)}"/>
                  </h:form>   
              </h:column>
         </h:dataTable>

@@ -6,6 +6,7 @@
 package com.tareas.web;
 
 import com.tareas.entidades.Tarea;
+import com.tareas.entidades.Usuario;
 import com.tareas.excepciones.TareaNotFoundException;
 import com.tareas.excepciones.TareaUpdateException;
 import com.tareas.servicios.TareasServiceLocal;
@@ -16,6 +17,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -30,6 +32,10 @@ public class GestionTareasManagedBean {
     private Collection<Tarea> coleccionTareasDONE;
     private Tarea tareaSelec;
     
+    @Inject
+    private LoginManagedBean loginMB;
+    
+    private Usuario usuarioLog;
     
     @EJB
     private TareasServiceLocal tareasService;
@@ -39,9 +45,10 @@ public class GestionTareasManagedBean {
     }
     @PostConstruct
     public void iniciar(){
-        this.coleccionTareasTODO=this.tareasService.getTareas(1, "TO DO");
-        this.coleccionTareasINPROGRESS=this.tareasService.getTareas(1, "IN PROGRESS");
-        this.coleccionTareasDONE=this.tareasService.getTareas(1, "DONE");
+        this.usuarioLog=loginMB.getUsuarioLog();
+        this.coleccionTareasTODO=this.tareasService.getTareas(usuarioLog.getIdUsuario(), "TO DO");
+        this.coleccionTareasINPROGRESS=this.tareasService.getTareas(usuarioLog.getIdUsuario(), "IN PROGRESS");
+        this.coleccionTareasDONE=this.tareasService.getTareas(usuarioLog.getIdUsuario(), "DONE");
         this.tareaSelec=new Tarea();
     }
 
@@ -64,15 +71,21 @@ public class GestionTareasManagedBean {
     public void setTareaSelec(Tarea tareaSelec) {
         this.tareaSelec = tareaSelec;
     }
+
+    public Usuario getUsuarioLog() {
+        return usuarioLog;
+    }
+
+    public void setUsuarioLog(Usuario usuarioLog) {
+        this.usuarioLog = usuarioLog;
+    }
     
     
     public  String updateInProgress(Tarea t){
         try {
             this.tareasService.modificarEstado(t,"IN PROGRESS" );
             //Recargo los listados
-            this.coleccionTareasTODO=tareasService.getTareas(1, "TO DO");
-            this.coleccionTareasINPROGRESS=tareasService.getTareas(1, "IN PROGRESS");
-            this.coleccionTareasDONE=tareasService.getTareas(1, "DONE");
+            this.iniciar();
         } catch (TareaNotFoundException ex) {
             FacesContext fc= FacesContext.getCurrentInstance();
             fc.addMessage(null, new FacesMessage("No se pudo modificar"+ex.getMessage()) );
@@ -85,9 +98,7 @@ public class GestionTareasManagedBean {
     public  String updateToDo(Tarea t){
         try {
             this.tareasService.modificarEstado(t,"TO DO" );
-            this.coleccionTareasTODO=tareasService.getTareas(1, "TO DO");
-            this.coleccionTareasINPROGRESS=tareasService.getTareas(1, "IN PROGRESS");
-            this.coleccionTareasDONE=tareasService.getTareas(1, "DONE");
+            this.iniciar();
         } catch (TareaNotFoundException ex) {
             FacesContext fc= FacesContext.getCurrentInstance();
             fc.addMessage(null, new FacesMessage("No se pudo modificar"+ex.getMessage()) );
@@ -100,9 +111,7 @@ public class GestionTareasManagedBean {
     public  String updateDONE(Tarea t){
         try {
             this.tareasService.modificarEstado(t,"DONE" );
-            this.coleccionTareasTODO=tareasService.getTareas(1, "TO DO");
-            this.coleccionTareasINPROGRESS=tareasService.getTareas(1, "IN PROGRESS");
-            this.coleccionTareasDONE=tareasService.getTareas(1, "DONE");
+            this.iniciar();
         } catch (TareaNotFoundException ex) {
             FacesContext fc= FacesContext.getCurrentInstance();
             fc.addMessage(null, new FacesMessage("No se pudo modificar"+ex.getMessage()) );
