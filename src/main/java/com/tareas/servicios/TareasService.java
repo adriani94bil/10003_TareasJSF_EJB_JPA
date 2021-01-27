@@ -13,11 +13,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.eclipse.persistence.exceptions.DatabaseException;
 
-/**
- *
- * @author user
- */
 @Stateless
 public class TareasService implements TareasServiceLocal {
 
@@ -49,6 +46,17 @@ public class TareasService implements TareasServiceLocal {
         tareaDB.setEstado(nuevoEstado);
         //Al finalizar el método realiza el commit
         
+    }
+
+    @Override
+    public void altaTarea(Tarea t) throws DatabaseException {
+        em.persist(t);
+    }
+
+    @Override
+    public void borrarTarea(int i) throws TareaNotFoundException {
+        Tarea t=this.getTarea(i);
+        em.remove(t);
     }
 
 

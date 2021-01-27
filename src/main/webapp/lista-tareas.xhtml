@@ -1,80 +1,102 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Lista Tareas</title>
-    </h:head>
-    <h:body>
-        <h2> Mis Tareas</h2>
-        <h:dataTable var="tareaToDo" value="#{gestionTareasMB.coleccionTareasTODO}">
-             <h:column>
-                    <f:facet name="header">Id </f:facet>
-                    #{tareaToDo.idTarea}
-              </h:column>
-             <h:column>
-                    <f:facet name="header">Descripcion </f:facet>
-                    #{tareaToDo.descripcion}
-              </h:column>
-             <h:column>
-                    <f:facet name="header">Nombre </f:facet>
-                    #{tareaToDo.usuario.nombre}
-             </h:column>
-             <h:column>
-                 <h:form id="formToDoIn">
-                    <f:facet name="header"> </f:facet>
-                    <h:commandButton value="--->" action="#{gestionTareasMB.updateInProgress(tareaToDo)}"/>
-                 </h:form>   
-             </h:column>
-        </h:dataTable>
-        
-        <h:dataTable var="tareaInProgress" value="#{gestionTareasMB.coleccionTareasINPROGRESS}">
-            <h:column>
-                 <h:form id="formInToDo">
-                    <f:facet name="header"> </f:facet>
-                    <h:commandButton value="(===" action="#{gestionTareasMB.updateToDo(tareaInProgress)}" /> 
-                 </h:form>   
-             </h:column>
-             <h:column>
-                    <f:facet name="header">Id </f:facet>
-                    #{tareaInProgress.idTarea}
-              </h:column>
-             <h:column>
-                    <f:facet name="header">Descripcion </f:facet>
-                    #{tareaInProgress.descripcion}
-              </h:column>
-             <h:column>
-                    <f:facet name="header">Nombre </f:facet>
-                    #{tareaInProgress.usuario.nombre}
-             </h:column>
-            <h:column>
-                 <h:form id="formInDone">
-                    <f:facet name="header"> </f:facet>
-                    <h:commandButton value="--->" action="#{gestionTareasMB.updateDONE(tareaInProgress)}" /> 
-                 </h:form>   
-             </h:column>
-        </h:dataTable>
-        <h:dataTable var="tareaDone" value="#{gestionTareasMB.coleccionTareasDONE}">
-            <h:column>
-                 <h:form id="formDoneIn">
-                    <f:facet name="header"> </f:facet>
-                    <h:commandButton value="(==" action="#{gestionTareasMB.updateInProgress(tareaDone)}" /> 
-                 </h:form>   
-             </h:column>
-             <h:column>
-                    <f:facet name="header">Id </f:facet>
-                    #{tareaDone.idTarea}
-              </h:column>
-             <h:column>
-                    <f:facet name="header">Descripcion </f:facet>
-                    #{tareaDone.descripcion}
-              </h:column>
-             <h:column>
-                    <f:facet name="header">Nombre </f:facet>
-                    #{tareaDone.usuario.nombre}
-             </h:column>
-        </h:dataTable>
-    </h:body>
-</html>
 
+    <body>
+
+        <ui:composition template="./WEB-INF/view/plantilla.xhtml">
+
+            <ui:define name="content">
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <h2> Mis Tareas</h2>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h:link outcome="alta-tarea">
+                            <img src="https://www.flaticon.es/svg/static/icons/svg/1368/1368593.svg"  style="width: 50px; height: 50px" alt="Fallo"/>
+                        </h:link>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="col-4">
+                            <h:dataTable var="tareaToDo" value="#{gestionTareasMB.coleccionTareasTODO}">
+                                <h:column>
+                                       <f:facet name="header">Id </f:facet>
+                                       #{tareaToDo.idTarea}
+                                 </h:column>
+                                <h:column>
+                                       <f:facet name="header">Descripcion </f:facet>
+                                       #{tareaToDo.descripcion}
+                                 </h:column>
+                                <h:column>
+                                       <f:facet name="header">Nombre </f:facet>
+                                       #{tareaToDo.usuario.nombre}
+                                </h:column>
+                                <h:column>
+                                    <h:form id="formToDoIn">
+                                       <f:facet name="header"> </f:facet>
+                                       <h:commandButton action="#{gestionTareasMB.updateInProgress(tareaToDo)}" styleClass="rightbtn"/>
+                                    </h:form>   
+                                </h:column>
+                           </h:dataTable>
+                        </div>
+                        <div class="col-4">
+                            <h:dataTable var="tareaInProgress" value="#{gestionTareasMB.coleccionTareasINPROGRESS}">
+                                <h:column>
+                                     <h:form id="formInToDo">
+                                        <f:facet name="header"> </f:facet>
+                                        <h:commandButton  action="#{gestionTareasMB.updateToDo(tareaInProgress)}" styleClass="leftbtn" /> 
+                                     </h:form>   
+                                 </h:column>
+                                 <h:column>
+                                        <f:facet name="header">Id </f:facet>
+                                        #{tareaInProgress.idTarea}
+                                  </h:column>
+                                 <h:column>
+                                        <f:facet name="header">Descripcion </f:facet>
+                                        #{tareaInProgress.descripcion}
+                                  </h:column>
+                                 <h:column>
+                                        <f:facet name="header">Nombre </f:facet>
+                                        #{tareaInProgress.usuario.nombre}
+                                 </h:column>
+                                <h:column>
+                                     <h:form id="formInDone">
+                                        <f:facet name="header"> </f:facet>
+                                        <h:commandButton  action="#{gestionTareasMB.updateDONE(tareaInProgress)}" styleClass="rightbtn" /> 
+                                     </h:form>   
+                                 </h:column>
+                            </h:dataTable>
+                        </div>
+                        <div class="col-4">
+                            <h:dataTable var="tareaDone" value="#{gestionTareasMB.coleccionTareasDONE}">
+                                <h:column>
+                                     <h:form id="formDoneIn">
+                                        <f:facet name="header"> </f:facet>
+                                        <h:commandButton action="#{gestionTareasMB.updateInProgress(tareaDone)}" styleClass="leftbtn"/> 
+                                     </h:form>   
+                                 </h:column>
+                                 <h:column>
+                                        <f:facet name="header">Id </f:facet>
+                                        #{tareaDone.idTarea}
+                                  </h:column>
+                                 <h:column>
+                                        <f:facet name="header">Descripcion </f:facet>
+                                        #{tareaDone.descripcion}
+                                  </h:column>
+                                 <h:column>
+                                        <f:facet name="header">Nombre </f:facet>
+                                        #{tareaDone.usuario.nombre}
+                                 </h:column>
+                            </h:dataTable>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

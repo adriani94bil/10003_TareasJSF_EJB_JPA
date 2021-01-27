@@ -62,7 +62,8 @@ public class PruebasManagedBean {
             Logger.getLogger(PruebasManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void altaUsuario(){
+    public String altaUsuario(){
         usuarioService.alta(usuarioRegister);
+        return "login?faces-redirect=true";
     }
 }

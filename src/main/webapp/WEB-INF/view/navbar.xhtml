@@ -27,6 +27,9 @@
                             <li class="nav-item">
                                 <h:link class="nav-link" outcome="lista-tareas">Mis Tareas</h:link>
                             </li>
+                            <li class="nav-item">
+                                <h:link class="nav-link" rendered="#{loginMB.usuarioLog.idUsuario==1}" outcome="lista-usuarios">Admin usuarios</h:link>
+                            </li>
                             <li class="nav-item" style="margin-left:3px" rendered="#{usuarioMB.usuarioLog!=null}">
                                 <h6 class="nav-link">Hola #{loginMB.email}</h6>
                             </li>

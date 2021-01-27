@@ -31,6 +31,7 @@ public class GestionTareasManagedBean {
     private Collection<Tarea> coleccionTareasINPROGRESS;
     private Collection<Tarea> coleccionTareasDONE;
     private Tarea tareaSelec;
+    private Tarea nuevaTarea;
     
     @Inject
     private LoginManagedBean loginMB;
@@ -50,6 +51,7 @@ public class GestionTareasManagedBean {
         this.coleccionTareasINPROGRESS=this.tareasService.getTareas(usuarioLog.getIdUsuario(), "IN PROGRESS");
         this.coleccionTareasDONE=this.tareasService.getTareas(usuarioLog.getIdUsuario(), "DONE");
         this.tareaSelec=new Tarea();
+        this.nuevaTarea=new Tarea();
     }
 
     public Collection<Tarea> getColeccionTareasTODO() {
@@ -72,6 +74,15 @@ public class GestionTareasManagedBean {
         this.tareaSelec = tareaSelec;
     }
 
+    public Tarea getNuevaTarea() {
+        return nuevaTarea;
+    }
+
+    public void setNuevaTarea(Tarea nuevaTarea) {
+        this.nuevaTarea = nuevaTarea;
+    }
+    
+
     public Usuario getUsuarioLog() {
         return usuarioLog;
     }
@@ -80,6 +91,12 @@ public class GestionTareasManagedBean {
         this.usuarioLog = usuarioLog;
     }
     
+    public String altaTarea(){
+        this.nuevaTarea.setEstado("TO DO");
+        this.nuevaTarea.setUsuario(usuarioLog);
+        tareasService.altaTarea(nuevaTarea);
+        return "lista-tareas?faces-redirect=true";
+    }
     
     public  String updateInProgress(Tarea t){
         try {
@@ -118,6 +135,16 @@ public class GestionTareasManagedBean {
         } catch (TareaUpdateException ex) {
             FacesContext fc= FacesContext.getCurrentInstance();
             fc.addMessage(null, new FacesMessage("No se pudo modificar"+ex.getMessage()) );
+        }
+        return "lista-tareas";
+    }
+    public String borrarTarea(int id){
+        try {
+            this.tareasService.borrarTarea(id);
+            this.iniciar();
+        } catch (TareaNotFoundException ex) {
+            FacesContext fc= FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage("No se pudo borrar"+ex.getMessage()) );
         }
         return "lista-tareas";
     }

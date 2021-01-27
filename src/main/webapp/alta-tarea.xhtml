@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/view/plantilla.xhtml">
+
+            <ui:define name="content">
+                 <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-2">
+                            <img src="https://www.flaticon.es/svg/vstatic/svg/1872/1872779.svg?token=exp=1611737917~hmac=7f6a79d1020c1f8af0b7797ca45a8028" alt="" width="90" height="72"> </img>
+                        </div>
+                        <div class="col-3">
+                            <h4>Nueva Tarea</h4>
+                            <h:form id="formAltaTarea">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="mail-icon">
+                                        <img src="https://www.flaticon.com/svg/vstatic/svg/1250/1250615.svg?token=exp=1611739235~hmac=8c88771fc98d823f52e491565f8f7626" width="15" height="22,5"></img>
+                                    </span>
+                                    <h:inputText class="form-control" value="#{gestionTareasMB.nuevaTarea.descripcion}"/>
+                                </div>
+                                <br/>
+                                <h:commandButton value="Guardar" id="alta" action="#{gestionTareasMB.altaTarea()}" />
+                            </h:form>
+                        </div>
+                        <div class="col-2">
+                            <img src="https://www.flaticon.es/svg/vstatic/svg/1872/1872779.svg?token=exp=1611737917~hmac=7f6a79d1020c1f8af0b7797ca45a8028" alt="" width="90" height="72"> </img>
+                        </div>
+                    </div>
+                    
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

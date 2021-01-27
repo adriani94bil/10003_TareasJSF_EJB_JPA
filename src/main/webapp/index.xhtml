@@ -1,24 +1,57 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <body>
 
         <ui:composition template="./WEB-INF/view/plantilla.xhtml">
 
             <ui:define name="content">
-                <c:if test="#{pruebasMB.usuarioEncontrado!=null}">
-                    #{pruebasMB.usuarioEncontrado.email}
-                </c:if>
-                <h:form>
-
-                    <h:commandButton value="Buscar usuario Logeado"
-                                     action="#{pruebasMB.mostrarUsuario(loginMB.usuarioLog.idUsuario)}"/>
-                </h:form>
-                <h:link outcome="lista-usuarios" value="Lista de Usuarios"></h:link>
+                <div class="container-fluid" style="margin-top: 30 px">
+                    <div class="row justify-content-center" style="margin-top: 30px">
+                        <h1> Gestiona tu PYME comodamente</h1>
+                    </div>
+                    <div class="row justify-content-center" style="margin-top: 20px">
+                        <div class="col-6">
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-header">
+                                    <h4 class="my-0 fw-normal"> Plan gratuito</h4>
+                                </div>
+                                <div class="card-body">
+                                    <h1 class="card-title pricing-card-title"> 0€</h1>
+                                    <ul class="list-unstyled mt-3 mb-4">
+                                        <li>2 usuarios equipo</li>
+                                        <li> 2GB almacenamiento</li>
+                                        <li> Sin ayuda del soporte</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-header">
+                                    <h4 class="my-0 fw-normal"> Plan premium</h4>
+                                </div>
+                                <div class="card-body">
+                                    <h1 class="card-title pricing-card-title"> 15€</h1>
+                                    <ul class="list-unstyled mt-3 mb-4">
+                                        <li>10 usuarios equipo</li>
+                                        <li> 15GB almacenamiento</li>
+                                        <li> Soporte en remoto</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="tshirt">
+                        <div class="box">
+                           <div class="title">Think Outside The Box</div>
+                        </div>
+                    </div>
+                </div>
             </ui:define>
 
         </ui:composition>
