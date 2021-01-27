@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <f:view locale="ES">
+    <f:view locale="#{idiomaMB.idiomaUser}">
         <h:head>
             <title>Facelet Title</title>
         </h:head>
@@ -13,7 +13,7 @@
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">
                     <img src="https://www.flaticon.es/svg/static/icons/svg/1721/1721929.svg" alt="" width="45" height="36" class="d-inline-block align-top"/>
-                    Tareas COVID
+                    #{textos.title}
                   </a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,30 +22,30 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <h:panelGroup rendered="#{loginMB.email!=null and loginMB.password==loginMB.usuarioLog.password }">
                             <li class="nav-item">
-                                  <h:link class="nav-link" outcome="index">Index</h:link>
+                                <h:link class="nav-link" outcome="index">#{textos.index}</h:link>
                             </li>
                             <li class="nav-item">
-                                <h:link class="nav-link" outcome="lista-tareas">Mis Tareas</h:link>
+                                <h:link class="nav-link" outcome="lista-tareas">#{textos.TaskList}</h:link>
                             </li>
                             <li class="nav-item">
                                 <h:link class="nav-link" rendered="#{loginMB.usuarioLog.idUsuario==1}" outcome="lista-usuarios">Admin usuarios</h:link>
                             </li>
                             <li class="nav-item" style="margin-left:3px" rendered="#{usuarioMB.usuarioLog!=null}">
-                                <h6 class="nav-link">Hola #{loginMB.email}</h6>
+                                <h6 class="nav-link">#{textos.saludo} #{loginMB.email}</h6>
                             </li>
                             <li class="nav-item"> 
                                 <h:form id="formlogout" rendered="#{loginMB.usuarioLog!=null}">
                                     <h:commandButton action="#{loginMB.logout()}" value="logout" class="btn btn-secondary"/>  
                                 </h:form>
                             </li>
-<!--                            <h:form id="formAux" rendered="#{loginMB.usuarioLog!=null}">
-                                <li class="nav-item">
+                            <h:form id="formAux" rendered="#{loginMB.usuarioLog!=null}">
+                                <li class="nav-item" style="margin-left:3px">
                                     <h:commandLink value="ES" action="#{idiomaMB.cambiarIdioma('es')}" />
                                 </li >
-                                <li class="nav-item">
+                                <li class="nav-item" style="margin-left:3px">
                                     <h:commandLink value="EN"  action="#{idiomaMB.cambiarIdioma('en')}"/>
                                 </li>
-                            </h:form>-->
+                            </h:form>
                         </h:panelGroup>
                     </ul>
                   </div>

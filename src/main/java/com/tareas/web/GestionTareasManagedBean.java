@@ -94,6 +94,7 @@ public class GestionTareasManagedBean {
     public String altaTarea(){
         this.nuevaTarea.setEstado("TO DO");
         this.nuevaTarea.setUsuario(usuarioLog);
+        this.nuevaTarea.setActiva(true);
         tareasService.altaTarea(nuevaTarea);
         return "lista-tareas?faces-redirect=true";
     }

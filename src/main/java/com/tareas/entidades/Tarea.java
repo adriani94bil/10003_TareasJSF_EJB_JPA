@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "TAREAS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tarea.findAll", query = "SELECT t FROM Tarea t"),
-    @NamedQuery(name = "Tarea.findByEstadoAndUserId", query = "SELECT t FROM Tarea t WHERE t.estado = :estado AND t.usuario.idUsuario= :idUsuario"),
+    @NamedQuery(name = "Tarea.findAll", query = "SELECT t FROM Tarea t WHERE t.activa=true"),
+    @NamedQuery(name = "Tarea.findByEstadoAndUserId", query = "SELECT t FROM Tarea t WHERE t.estado = :estado AND t.usuario.idUsuario= :idUsuario AND t.activa=true"),
     @NamedQuery(name = "Tarea.findByIdTarea", query = "SELECT t FROM Tarea t WHERE t.idTarea = :idTarea"),
     @NamedQuery(name = "Tarea.findByDescripcion", query = "SELECT t FROM Tarea t WHERE t.descripcion = :descripcion"),
     @NamedQuery(name = "Tarea.findByEstado", query = "SELECT t FROM Tarea t WHERE t.estado = :estado")
@@ -49,6 +49,10 @@ public class Tarea implements Serializable {
     @Size(min = 1, max = 15)
     @Column(name = "ESTADO")
     private String estado;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name="ACTIVA")
+    private boolean activa;
     
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     @ManyToOne(optional = false)
@@ -59,12 +63,14 @@ public class Tarea implements Serializable {
 
     public Tarea(Integer idTarea) {
         this.idTarea = idTarea;
+        this.activa=true;
     }
 
     public Tarea(Integer idTarea, String descripcion, String estado) {
         this.idTarea = idTarea;
         this.descripcion = descripcion;
         this.estado = estado;
+        this.activa=true;
     }
 
     public Integer getIdTarea() {
@@ -98,6 +104,15 @@ public class Tarea implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+    
 
     @Override
     public int hashCode() {

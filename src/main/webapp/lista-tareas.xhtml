@@ -21,19 +21,11 @@
                     </div>
                     <div class="row justify-content-around">
                         <div class="col-4">
-                            <h:dataTable var="tareaToDo" value="#{gestionTareasMB.coleccionTareasTODO}">
-                                <h:column>
-                                       <f:facet name="header">Id </f:facet>
-                                       #{tareaToDo.idTarea}
-                                 </h:column>
-                                <h:column>
-                                       <f:facet name="header">Descripcion </f:facet>
+                            <h:dataTable class="table table-hover" var="tareaToDo" value="#{gestionTareasMB.coleccionTareasTODO}">
+                                <h:column >
+                                       <f:facet name="header"> Descripcion </f:facet>
                                        #{tareaToDo.descripcion}
                                  </h:column>
-                                <h:column>
-                                       <f:facet name="header">Nombre </f:facet>
-                                       #{tareaToDo.usuario.nombre}
-                                </h:column>
                                 <h:column>
                                     <h:form id="formToDoIn">
                                        <f:facet name="header"> </f:facet>
@@ -43,7 +35,7 @@
                            </h:dataTable>
                         </div>
                         <div class="col-4">
-                            <h:dataTable var="tareaInProgress" value="#{gestionTareasMB.coleccionTareasINPROGRESS}">
+                            <h:dataTable class="table table-hover" var="tareaInProgress" value="#{gestionTareasMB.coleccionTareasINPROGRESS}">
                                 <h:column>
                                      <h:form id="formInToDo">
                                         <f:facet name="header"> </f:facet>
@@ -51,17 +43,9 @@
                                      </h:form>   
                                  </h:column>
                                  <h:column>
-                                        <f:facet name="header">Id </f:facet>
-                                        #{tareaInProgress.idTarea}
-                                  </h:column>
-                                 <h:column>
                                         <f:facet name="header">Descripcion </f:facet>
                                         #{tareaInProgress.descripcion}
                                   </h:column>
-                                 <h:column>
-                                        <f:facet name="header">Nombre </f:facet>
-                                        #{tareaInProgress.usuario.nombre}
-                                 </h:column>
                                 <h:column>
                                      <h:form id="formInDone">
                                         <f:facet name="header"> </f:facet>
@@ -71,7 +55,7 @@
                             </h:dataTable>
                         </div>
                         <div class="col-4">
-                            <h:dataTable var="tareaDone" value="#{gestionTareasMB.coleccionTareasDONE}">
+                            <h:dataTable class="table table-hover" var="tareaDone" value="#{gestionTareasMB.coleccionTareasDONE}">
                                 <h:column>
                                      <h:form id="formDoneIn">
                                         <f:facet name="header"> </f:facet>
@@ -79,17 +63,9 @@
                                      </h:form>   
                                  </h:column>
                                  <h:column>
-                                        <f:facet name="header">Id </f:facet>
-                                        #{tareaDone.idTarea}
-                                  </h:column>
-                                 <h:column>
                                         <f:facet name="header">Descripcion </f:facet>
                                         #{tareaDone.descripcion}
                                   </h:column>
-                                 <h:column>
-                                        <f:facet name="header">Nombre </f:facet>
-                                        #{tareaDone.usuario.nombre}
-                                 </h:column>
                             </h:dataTable>
                         </div>
                     </div>

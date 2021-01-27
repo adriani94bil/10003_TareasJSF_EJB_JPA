@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "USUARIOS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u WHERE u.activo=true"),
     @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
     @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
@@ -56,6 +56,10 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "PASSWORD")
     private String password;
+    @Basic(optional=false)
+    @NotNull
+    @Column(name="ACTIVO")
+    private boolean activo;
     
     // MAPPEDBY indica el atributo de la clase Tarea
     
@@ -74,6 +78,7 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
+        this.activo=true;
     }
 
     public Integer getIdUsuario() {
@@ -108,6 +113,15 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
 //    @XmlTransient
 //    public Collection<Tarea> getTareasCollection() {
 //        return tareasCollection;

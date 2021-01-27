@@ -33,6 +33,10 @@
                             <f:validateLength minimum="1"/>
                         </h:inputSecret>
                     </div>
+                    <div>
+                        Activo
+                        <h:selectBooleanCheckbox value="#{gestionUsuariosMB.usuarioAModificar.activo}" />
+                    </div>
                     <h:commandButton  class="btn btn-secondary" value="Update" action="#{gestionUsuariosMB.update()}" />
                     <h:commandButton class="btn btn-secondary" value="Cancelar" action="lista-usuarios" immediate="true" />
                 </h:form>

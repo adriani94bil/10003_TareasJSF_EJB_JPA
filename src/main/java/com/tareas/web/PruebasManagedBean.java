@@ -63,6 +63,7 @@ public class PruebasManagedBean {
         }
     }
     public String altaUsuario(){
+        this.usuarioRegister.setActivo(true);
         usuarioService.alta(usuarioRegister);
         return "login?faces-redirect=true";
     }
