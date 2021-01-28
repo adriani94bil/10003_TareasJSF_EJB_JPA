@@ -10,22 +10,40 @@
         <ui:composition template="./WEB-INF/view/plantilla.xhtml">
 
             <ui:define name="content">
-                <h:form>
-                    Nombre
-                    <h:inputText value="#{pruebasMB.usuarioRegister.nombre}" required="true" requiredMessage="Obligatorio" id="nombre">
-                    </h:inputText>
-                    <br/>
-                    Email
-                    <h:inputText value="#{pruebasMB.usuarioRegister.email}" required="true" requiredMessage="Obligatorio" id="email">
-                    </h:inputText>
-                    <br/>
-                    Clave
-                    <h:inputSecret value="#{pruebasMB.usuarioRegister.password}" required="true" requiredMessage="Obligatorio" id="pwd">
-                        <f:validateLength minimum="1"/>
-                    </h:inputSecret>
-                    <h:commandButton value="Registro"
-                                     action="#{pruebasMB.altaUsuario()}"/>
-                </h:form>
+                <div class="container-fluid">
+                    <h:form id="formRegister">
+                        <div class="input-group col-4">
+                            <span class="input-group-text" id="mail-icon">
+                                Nombre
+                            </span>
+                            <h:inputText value="#{pruebasMB.usuarioRegister.nombre}" required="true" requiredMessage="Obligatorio" id="nombre">
+                            </h:inputText>
+                        </div>
+                        <br/>
+                        <div class="input-group col-4">
+                            <span class="input-group-text" id="mail-icon">
+                                <img src="https://www.flaticon.es/svg/vstatic/svg/2258/2258541.svg?token=exp=1611738521~hmac=e5395df4aa7fc8b53615d3c8b30fda23" width="15" height="22,5"></img>
+                            </span>
+                            <h:inputText class="form-control" value="#{pruebasMB.usuarioRegister.email}" required="true" requiredMessage="Obligatorio" id="email">
+                            </h:inputText>
+                        </div>
+                        <br/>
+                        <div class="input-group col-4">
+                            <span class="input-group-text" id="lock-icon">
+                                <img src="https://www.flaticon.com/svg/vstatic/svg/483/483408.svg?token=exp=1611738874~hmac=4e22c81c1ca5e3acfbef51413ea95670" width="15" height="22,5"></img>
+                            </span>
+                            <h:inputSecret class="form-control" value="#{pruebasMB.usuarioRegister.password}" required="true" requiredMessage="Obligatorio" id="pwd">
+                                <f:validateLength minimum="1"/>
+                            </h:inputSecret>
+                        </div>
+                        <br/>
+                        <h:commandButton value="Registro" class="btn btn-secondary"
+                                         action="#{pruebasMB.altaUsuario()}"/>
+                        <h:commandButton class="btn btn-secondary" action="login" 
+                                         value="Cancelar"
+                                         immediate="true"/>
+                    </h:form>
+                </div>
             </ui:define>
 
         </ui:composition>
